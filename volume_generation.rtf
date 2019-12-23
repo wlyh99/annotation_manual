@@ -1,0 +1,42 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+dim_z = 21;\
+	dim_x = 512;\
+	dim_y = 256\
+\
+	path1=getDirectory("Mydir");\
+	file_name=getInfo("image.filename");\
+\
+	for (i=1; i<=dim_z; i+=1)  \{\
+  		Stack.setSlice(i);\
+  		saveAs("jpeg", path1+"Z_" + i + "_2_0.jpeg");\
+	\}\
+\
+	run("Reslice [/]...", "output=1.000 start=Left avoid");\
+\
+	for (i=1; i<=dim_x; i+=1)  \{\
+  		Stack.setSlice(i);\
+  		saveAs("jpeg", path1+"X_" + i + "_2_0.jpeg");\
+	\}\
+\
+\
+	selectWindow(file_name);\
+\
+	run("Reslice [/]...", "output=1.000 start=Top avoid");\
+	run("Rotate 90 Degrees Right");\
+\
+\
+	for (i=1; i<=dim_y; i+=1)  \{\
+  		Stack.setSlice(i);\
+  		saveAs("jpeg", path1+"Y_" + i + "_2_0.jpeg");\
+	\}\
+\
+	close("*")\
+}
